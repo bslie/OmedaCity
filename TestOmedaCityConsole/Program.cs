@@ -7,12 +7,13 @@ internal class Program
     {
         try
         {
-            var result = await OmedaCityClientApi.GetPlayerById("sdasda");
-            Console.WriteLine(result.DisplayName);
+            var result = await OmedaCityClientApi.GetMatchById("");
+            Console.WriteLine(result.Players);
         }
         catch (Exception e)
         {
             Console.WriteLine(e);
+            
         }
        
         Console.ReadKey();
