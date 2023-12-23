@@ -20,7 +20,7 @@ Here're some of the project's best features:
 <p>1. Installation via command line using dotnet CLI.</p>
 
 ```ruby
-dotnet package OmedaCity
+dotnet add package OmedaCity
 ```
 
 <h2>Example</h2>
