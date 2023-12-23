@@ -22,6 +22,19 @@ Here're some of the project's best features:
 ```
 dotnet package OmedaCity
 ```
+
+<h2>Example</h2>
+
+```
+public async Task GetPlayerById()
+{
+    var player = await OmedaCityClientApi.GetPlayerById("<PLAYER ID FROM OMEDA CITY>");
+    Console.WriteLine($"Name: {player.DisplayName}");
+    Console.WriteLine($"MMR: {player.Mmr}");
+    Console.WriteLine($"Rank: {player.RankTitle}");
+}
+
+```
   
 <h2>💻 Built with</h2>
 
