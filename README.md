@@ -17,7 +17,11 @@ Here're some of the project's best features:
 
 <h2>🛠️ Installation Steps:</h2>
 
-  
+<p>1. Installation via command line using dotnet CLI.</p>
+
+```
+dotnet package OmedaCity
+```
   
 <h2>💻 Built with</h2>
 
