@@ -4,7 +4,22 @@
     <TargetFramework>net6.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
+    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+    <Title>Omeda City API Client</Title>
+    <Authors>$(AssemblyName), Lie</Authors>
+    <Description>A lightweight API client written in C#, to optimize your time when developing projects for the Predecessor game.</Description>
+    <Copyright>MIT License</Copyright>
+    <PackageProjectUrl>https://github.com/bslie/OmedaCity</PackageProjectUrl>
+    <PackageIcon>banner-24f4789cebe99d4408f94ed46ab0f2c008f659410128a05a3f8a2c1881a951fe (1).jpg</PackageIcon>
+    <RepositoryUrl>https://github.com/bslie/OmedaCity</RepositoryUrl>
   </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="..\..\..\..\Downloads\banner-24f4789cebe99d4408f94ed46ab0f2c008f659410128a05a3f8a2c1881a951fe (1).jpg">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
+  </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Flurl.Http" Version="4.0.0" />
