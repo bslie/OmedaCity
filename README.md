@@ -26,6 +26,9 @@ dotnet package OmedaCity
 <h2>Example</h2>
 
 ```C#
+using OmedaCity;
+using OmedaCity.Enums;
+
 public async Task GetPlayerById()
 {
     var player = await OmedaCityClientApi.GetPlayerById("<PLAYER ID FROM OMEDA CITY>");
