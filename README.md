@@ -17,12 +17,31 @@ Here're some of the project's best features:
 
 <h2>🛠️ Installation Steps:</h2>
 
-  
+<p>1. Installation via command line using dotnet CLI.</p>
+
+```ruby
+dotnet add package OmedaCity
+```
+
+<h2>Example</h2>
+
+```C#
+using OmedaCity;
+using OmedaCity.Enums;
+
+public async Task GetPlayerById()
+{
+    var player = await OmedaCityClientApi.GetPlayerById("<PLAYER ID FROM OMEDA CITY>");
+    Console.WriteLine($"Name: {player.DisplayName}");
+    Console.WriteLine($"MMR: {player.Mmr}");
+    Console.WriteLine($"Rank: {player.RankTitle}");
+}
+
+```
   
 <h2>💻 Built with</h2>
 
 Technologies used in the project:
 
 *   C# 6.0
-*   Flurl 4.0
 *   Newtonsoft.Json 13.0.3
