@@ -12,10 +12,20 @@
     <PackageProjectUrl>https://github.com/bslie/OmedaCity</PackageProjectUrl>
     <PackageIcon>banner-24f4789cebe99d4408f94ed46ab0f2c008f659410128a05a3f8a2c1881a951fe (1).jpg</PackageIcon>
     <RepositoryUrl>https://github.com/bslie/OmedaCity</RepositoryUrl>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+    <PackageLicenseFile>License.txt</PackageLicenseFile>
   </PropertyGroup>
 
   <ItemGroup>
     <None Include="..\..\..\..\Downloads\banner-24f4789cebe99d4408f94ed46ab0f2c008f659410128a05a3f8a2c1881a951fe (1).jpg">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
+    <None Include="..\..\..\..\Downloads\README.md">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
+    <None Include="bin\Release\License.txt">
       <Pack>True</Pack>
       <PackagePath>\</PackagePath>
     </None>
