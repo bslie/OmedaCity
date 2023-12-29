@@ -44,5 +44,4 @@ public async Task GetPlayerById()
 Technologies used in the project:
 
 *   C# 6.0
-*   Flurl 4.0
 *   Newtonsoft.Json 13.0.3

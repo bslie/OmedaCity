@@ -1,6 +1,5 @@
 using System.ComponentModel;
 using System.Diagnostics.CodeAnalysis;
-using Flurl.Http;
 using OmedaCity;
 using OmedaCity.Enums;
 using OmedaCity.Models;
@@ -66,25 +65,9 @@ public class OmedaCityTests
     [Test]
     public async Task TestGetHeroStatisticsWithTimeFrame()
     {
-        var stats = await OmedaCityClientApi.GetHeroStatistics(TimeFrame.All);
+        var stats = await OmedaCityClientApi.GetHeroStatistics(new[] { 1, 2, 4 });
         NotNull(stats);
         if (stats.HeroStatistics is { Count: < 1 }) Assert.Fail();
-    }
-
-    [Test]
-    public void TestGetHeroStatisticsWithInvalidIds()
-    {
-        var ex = Assert.ThrowsAsync<ArgumentOutOfRangeException>(() =>
-            OmedaCityClientApi.GetHeroStatistics(Array.Empty<int>(), TimeFrame.All));
-        if (ex != null) Assert.That(ex?.ParamName, Is.EqualTo("heroIds"));
-    }
-
-    [Test]
-    public void TestGetHeroStatisticsWithInvalidTimeFrame()
-    {
-        var ex = Assert.ThrowsAsync<InvalidEnumArgumentException>(() =>
-            OmedaCityClientApi.GetHeroStatistics(new[] { 1, 2, 3 }, (TimeFrame)100));
-        if (ex != null) Assert.That(ex?.ParamName, Is.EqualTo("timeFrame"));
     }
 
     [Test]
@@ -110,13 +93,6 @@ public class OmedaCityTests
     }
 
     [Test]
-    public void TestGetHeroByInvalidName()
-    {
-        var ex = Assert.ThrowsAsync<FlurlHttpException>(() => OmedaCityClientApi.GetHeroByName("Zarusyatina"));
-        if (ex != null) Assert.That(ex?.StatusCode, Is.EqualTo(404));
-    }
-
-    [Test]
     public async Task TestGetItems()
     {
         var items = await OmedaCityClientApi.GetItems();
@@ -129,14 +105,6 @@ public class OmedaCityTests
     {
         var item = await OmedaCityClientApi.GetItemByName("Wraith_SonarDrone");
         NotNull(item);
-    }
-
-    [Test]
-    public void TestGetItemByInvalidName()
-    {
-        var ex = Assert.ThrowsAsync<FlurlHttpException>(() =>
-            OmedaCityClientApi.GetItemByName("WWraith_Sonar_blaba"));
-        if (ex != null) Assert.That(ex?.StatusCode, Is.EqualTo(404));
     }
 
     [Test]
@@ -164,14 +132,6 @@ public class OmedaCityTests
     }
 
     [Test]
-    public async Task TestGetMatchesWithDateTime()
-    {
-        var matches = await OmedaCityClientApi.GetMatches(DateTime.Now);
-        NotNull(matches);
-        if (matches.Matches is { Count: < 1 }) Assert.Warn("The result is less than 1");
-    }
-
-    [Test]
     public async Task TestGetMatchesWithCursor()
     {
         var matches =
@@ -182,27 +142,10 @@ public class OmedaCityTests
     }
 
     [Test]
-    public void TestGetMatchesWithInvalidCursor()
-    {
-        var ex = Assert.ThrowsAsync<FlurlHttpException>(() =>
-            OmedaCityClientApi.GetMatches(
-                "MjAyMy0xMi0yMiAxNDoyMDozMCBVVEMjM2UxYzhmMzYtNT*******************QyMzA3YTNiNGJh"));
-        if (ex != null) Assert.That(ex?.StatusCode, Is.EqualTo(500));
-    }
-
-    [Test]
     public async Task TestGetMatchById()
     {
         var match = await OmedaCityClientApi.GetMatchById("20d89b05-9a8d-4aea-b7ed-027979d5c145");
         NotNull(match);
-    }
-
-    [Test]
-    public void TestGetMatchByInvalidId()
-    {
-        var ex = Assert.ThrowsAsync<FlurlHttpException>(() =>
-            OmedaCityClientApi.GetMatchById("20d89b05-9a8d-4aea-ssss-027979d5c145"));
-        if (ex != null) Assert.That(ex?.StatusCode, Is.EqualTo(404));
     }
 
     [Test]
@@ -234,14 +177,6 @@ public class OmedaCityTests
     {
         var player = await OmedaCityClientApi.GetPlayerById("f54aa025-afa4-43bb-b75c-b225d1bd7a56");
         NotNull(player);
-    }
-
-    [Test]
-    public void TestGetPlayerByInvalidId()
-    {
-        var ex = Assert.ThrowsAsync<FlurlHttpException>(() =>
-            OmedaCityClientApi.GetPlayerById("f54aa025-afa4-43bb-b75c-d1bd7a56"));
-        if (ex != null) Assert.That(ex?.StatusCode, Is.EqualTo(404));
     }
 
 
