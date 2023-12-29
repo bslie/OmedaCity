@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using OmedaCity.Exceptions;
 using System.Web;
 
 namespace OmedaCity.Endpoint;
@@ -11,8 +12,19 @@ public class Endpoint<T> : IDisposable
     private readonly SocketsHttpHandler _handler;
     public Endpoint(string baseUrl)
     {
+        if (string.IsNullOrWhiteSpace(baseUrl))
+            throw new ArgumentException("Value cannot be null or whitespace.", nameof(baseUrl));
+
         KeepAlive = false;
-        _uriBuilder = new UriBuilder(baseUrl);
+
+        try
+        {
+            _uriBuilder = new UriBuilder(baseUrl);
+        }
+        catch (UriFormatException)
+        {
+            throw new UriFormatException("Base URL is not a valid URL.");
+        }
 
         _handler = new SocketsHttpHandler();
 
@@ -50,16 +62,30 @@ public class Endpoint<T> : IDisposable
     {
         var url = _uriBuilder.ToString();
 
-        var response = await _httpClient.GetAsync(url);
-        if (!response.IsSuccessStatusCode)
+        try
         {
-            throw new HttpRequestException($"Server returned status code {response.StatusCode}");
+            var response = await _httpClient.GetAsync(url);
+            if (!response.IsSuccessStatusCode)
+            {
+                throw new HttpRequestException($"The server returned a status code {response.StatusCode}");
+            }
+
+            var content = await response.Content.ReadAsStringAsync();
+            var result = JsonConvert.DeserializeObject<T>(content);
+            return result == null ? throw new InvalidOperationException("Failed to deserialize the response from the server") : result;
         }
-
-        var content = await response.Content.ReadAsStringAsync();
-        var result = JsonConvert.DeserializeObject<T>(content) ?? throw new InvalidOperationException();
-
-        return result;
+        catch (HttpRequestException ex)
+        {
+            throw new EndpointException("An error occurred while executing an HTTP request", ex);
+        }
+        catch (TaskCanceledException ex)
+        {
+            throw new EndpointException("The request was canceled", ex);
+        }
+        catch (InvalidOperationException ex)
+        {
+            throw new EndpointException("Invalid operation", ex);
+        }
     }
 
     public void Dispose()
