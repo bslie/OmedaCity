@@ -8,11 +8,19 @@ public class OmedaCityClientApi
 {
     public const string BaseUrl = "https://omeda.city/";
 
-    public static async Task<List<Build>> GetBuilds()
+    public static async Task<List<Build>> GetBuilds(int? page = null, int? heroId = null, Role? role = null,
+        string? name = null, bool? skillOrder = null, bool? modules = null, bool? order = null)
     {
         var endpoint = new Endpoint<List<Build>>(BaseUrl);
         return await endpoint
                    .AppendPathSegment("builds.json")
+                   .SetQueryParam("page", page)
+                   .SetQueryParam("filter[hero_id]", heroId)
+                   .SetQueryParam("filter[role]", role?.ToStringValue())
+                   .SetQueryParam("filter[name]", name)
+                   .SetQueryParam("filter[skill_order]", skillOrder)
+                   .SetQueryParam("filter[modules]", modules)
+                   .SetQueryParam("filter[order]", order)
                    .GetAsync()
                ?? throw new InvalidOperationException();
     }
@@ -173,7 +181,7 @@ public class OmedaCityClientApi
 
         return await endpoint
                    .AppendPathSegment("players.json")
-                   .SetQueryParam("q[name]", name)
+                   .SetQueryParam("filter[name]", name)
                    .SetQueryParam("page", page)
                    .GetAsync()
                ?? throw new InvalidOperationException();
@@ -206,35 +214,33 @@ public class OmedaCityClientApi
                    .AppendPathSegment("players")
                    .AppendPathSegment($"{playerId}/matches.json")
                    .SetQueryParam("page", page)
-                   .SetQueryParam("matches_per_page", matchesPerPage)
+                   .SetQueryParam("per_page", matchesPerPage)
                    .SetQueryParam("time_frame", timeFrame)
-                   .SetQueryParam("match_filter[hero_id]", heroId)
-                   .SetQueryParam("match_filter[role]", role)
-                   .SetQueryParam("match_filter[occuring_hero_id]", occurringHeroId)
-                   .SetQueryParam("match_filter[player_name]", playerName)
+                   .SetQueryParam("filter[hero_id]", heroId)
+                   .SetQueryParam("filter[role]", role)
+                   .SetQueryParam("filter[player_name]", playerName)
                    .GetAsync()
                ?? throw new InvalidOperationException();
     }
 
     public static async Task<PlayerMatches> GetPlayerMatches(string playerId, TimeFrame? timeFrame = null,
-        int? page = null, int? matchesPerPage = null, int? heroId = null, Role? role = null,
-        int? occurringHeroId = null, string? playerName = null)
+        int? page = null, int? matchesPerPage = null, int? heroId = null, Role? role = null, string? playerName = null)
     {
         if (string.IsNullOrWhiteSpace(playerId))
             throw new ArgumentException("Value cannot be null or whitespace.", nameof(playerId));
 
         var endpoint = new Endpoint<PlayerMatches>(BaseUrl);
 
+
         return await endpoint
                    .AppendPathSegment("players")
                    .AppendPathSegment($"{playerId}/matches.json")
                    .SetQueryParam("page", page)
-                   .SetQueryParam("matches_per_page", matchesPerPage)
+                   .SetQueryParam("per_page", matchesPerPage)
                    .SetQueryParam("time_frame", timeFrame?.ToStringValue())
-                   .SetQueryParam("match_filter[hero_id]", heroId)
-                   .SetQueryParam("match_filter[role]", role?.ToStringValue())
-                   .SetQueryParam("match_filter[occuring_hero_id]", occurringHeroId)
-                   .SetQueryParam("match_filter[player_name]", playerName)
+                   .SetQueryParam("filter[hero_id]", heroId)
+                   .SetQueryParam("filter[role]", role)
+                   .SetQueryParam("filter[player_name]", playerName)
                    .GetAsync()
                ?? throw new InvalidOperationException();
     }
