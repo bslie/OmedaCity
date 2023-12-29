@@ -1,6 +1,5 @@
 using System.ComponentModel;
 using System.Diagnostics.CodeAnalysis;
-using Flurl.Http;
 using OmedaCity;
 using OmedaCity.Enums;
 using OmedaCity.Models;
