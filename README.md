@@ -43,5 +43,6 @@ public async Task GetPlayerById()
 
 Technologies used in the project:
 
-*   C# 6.0
+*   C# 8.0
 *   Newtonsoft.Json 13.0.3
+*   FiveAnts.Endpoint 0.0.1
