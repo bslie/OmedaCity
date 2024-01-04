@@ -1,4 +1,4 @@
-﻿using OmedaCity.Endpoint;
+﻿using Endpoint.NET;
 using OmedaCity.Enums;
 using OmedaCity.Models;
 
@@ -28,7 +28,7 @@ public class OmedaCityClientApi
 
     public static async Task<Build> GetBuildById(int id)
     {
-        if (id <= 0) throw new ArgumentOutOfRangeException(nameof(id));
+        ArgumentOutOfRangeException.ThrowIfNegativeOrZero(id);
 
         var endpoint = new Endpoint<Build>(BaseUrl);
 
@@ -120,7 +120,7 @@ public class OmedaCityClientApi
 
     public static async Task<MatchesModel> GetMatches(long timestamp, int matchesPerPage = 10)
     {
-        if (timestamp <= 0) throw new ArgumentOutOfRangeException(nameof(timestamp));
+        ArgumentOutOfRangeException.ThrowIfNegativeOrZero(timestamp);
 
         var endpoint = new Endpoint<MatchesModel>(BaseUrl);
 
