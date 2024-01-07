@@ -14,10 +14,11 @@
     <RepositoryUrl>https://github.com/bslie/OmedaCity</RepositoryUrl>
     <PackageReadmeFile>README.md</PackageReadmeFile>
     <PackageLicenseFile>License.txt</PackageLicenseFile>
-    <AssemblyVersion>1.0.2</AssemblyVersion>
-    <FileVersion>1.0.2</FileVersion>
-    <Version>$(VersionPrefix)1.0.2</Version>
+    <AssemblyVersion>1.0.3</AssemblyVersion>
+    <FileVersion>1.0.3</FileVersion>
+    <Version>$(VersionPrefix)1.0.3</Version>
     <RootNamespace>$(MSBuildProjectName.Replace(" ", "_"))</RootNamespace>
+    <PackageReleaseNotes>Fixed a bug that caused the role filter to not be taken into account when using Enum.Role</PackageReleaseNotes>
   </PropertyGroup>
 
   <ItemGroup>
@@ -36,7 +37,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="FiveAnts.Endpoint" Version="0.0.1" />
+    <PackageReference Include="FiveAnts.Endpoint" Version="0.0.3" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
   </ItemGroup>
 

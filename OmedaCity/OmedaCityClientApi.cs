@@ -239,7 +239,7 @@ public class OmedaCityClientApi
                    .SetQueryParam("per_page", matchesPerPage)
                    .SetQueryParam("time_frame", timeFrame?.ToStringValue())
                    .SetQueryParam("filter[hero_id]", heroId)
-                   .SetQueryParam("filter[role]", role)
+                   .SetQueryParam("filter[role]", role?.ToStringValue(), false)
                    .SetQueryParam("filter[player_name]", playerName)
                    .GetAsync()
                ?? throw new InvalidOperationException();

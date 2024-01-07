@@ -192,7 +192,7 @@ public class OmedaCityTests
     public async Task TestGetPlayerMatches()
     {
         var playerMatches = await OmedaCityClientApi.GetPlayerMatches("f54aa025-afa4-43bb-b75c-b225d1bd7a56",
-            TimeFrame.W1, role: Role.Carry);
+            TimeFrame.M1, role: Role.Carry);
         NotNull(playerMatches);
         if (playerMatches.Matches is { Count: < 1 }) Assert.Fail("The result is less then 1");
     }
